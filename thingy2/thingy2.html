@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Chord Thingy2</title>
+</head>
+
+<body>
+<h1>Chord Thingy2</h1>
+<p>
+<button type="button" id="b1" onclick="check(1)"> I </button>
+<button type="button" id="b2" onclick="check(2)"> ii </button>
+<button type="button" id="b3" onclick="check(3)"> iii </button>
+<button type="button" id="b4" onclick="check(4)"> IV </button>
+<button type="button" id="b5" onclick="check(5)"> V </button>
+<button type="button" id="b6" onclick="check(6)"> vi </button>
+<button type="button" id="b7" onclick="check(7)"> vii° </button>
+<br>
+<br>
+Score
+<input type='text' id='id1' size="6" />
+Highscore
+<input type='text' id='id2' size="6" />
+</p>
+
+<script src="howler.core.js"></script>
+<script type="text/javascript">
+var lastplayed = 1;
+var clicked;
+var score = 0;
+
+var array1 = [1,5];
+var array2 = [1,4,5];
+var array3 = [1,4,5,6];
+var array4 = [1,3,4,5,6];
+var array5 = [1,2,3,4,5,6,7];
+
+document.getElementById("b2").disabled = true;
+document.getElementById("b3").disabled = true;
+document.getElementById("b4").disabled = true;
+document.getElementById("b6").disabled = true;
+document.getElementById("b7").disabled = true;
+
+document.getElementById("id1").disabled = true;
+document.getElementById("id2").disabled = true;
+document.getElementById('id1').value=0 ;
+document.getElementById("id2").value = localStorage.getItem("highscore");
+function check(clicked) {
+	if (clicked == lastplayed){
+		console.log('correcto');
+		playNext();
+		score ++;
+		document.getElementById('id1').value=score*50 ; 
+
+
+	}
+	else {
+		localStorage.setItem("highscore", score*50);
+		window.alert("You lose \nGame will restart");
+		console.log('You lose');
+		
+		location.reload();
+	}
+    
+}
+
+function playNext(){
+	if (score < 5){
+		lastplayed = array1[Math.floor(Math.random()*array1.length)];
+	}
+	else if (score < 15){
+		document.getElementById("b4").disabled = false;
+		lastplayed = array2[Math.floor(Math.random()*array2.length)];
+	}
+	else if (score < 30){
+		document.getElementById("b6").disabled = false;
+		lastplayed = array3[Math.floor(Math.random()*array3.length)];
+	}
+	else if (score < 45){
+		document.getElementById("b3").disabled = false;
+		lastplayed = array4[Math.floor(Math.random()*array4.length)];
+	}
+	else {
+		document.getElementById("b2").disabled = false;
+		document.getElementById("b7").disabled = false;
+		lastplayed = array5[Math.floor(Math.random()*array5.length)];
+	}
+	
+	console.log(lastplayed)
+	if (lastplayed == 1){
+		i.play();
+	}
+	if (lastplayed == 2){
+		ii.play();
+	}
+	if (lastplayed == 3){
+		iii.play();
+	}
+	if (lastplayed == 4){
+		iv.play();
+	}
+	if (lastplayed == 5){
+		v.play();
+	}
+	if (lastplayed == 6){
+		vi.play();
+	}
+	if (lastplayed == 7){
+		vii.play();
+	}
+}
+var i = new Howl({
+  src: ['1.mp3']
+});
+var ii = new Howl({
+  src: ['2.mp3']
+});
+var iii = new Howl({
+  src: ['3.mp3']
+});
+var iv = new Howl({
+  src: ['4.mp3']
+});
+var v = new Howl({
+  src: ['5.mp3']
+});
+var vi = new Howl({
+  src: ['6.mp3']
+});
+var vii = new Howl({
+  src: ['7.mp3']
+});
+
+i.play();
+
+    
+</script>
+</body>
+</html>
