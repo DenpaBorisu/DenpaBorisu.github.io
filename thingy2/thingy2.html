@@ -3,18 +3,63 @@
 
 <head>
   <title>Chord Thingy2</title>
+  <head>
+<style>
+.button {
+	width: 50px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    cursor: pointer;
+    background-color: white; 
+    color: black; 
+    border: 2px solid #f44336;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 20px;
+}
+.button:hover {
+    background-color: #f44336;
+    color: white;
+}
+.disabled {
+    opacity: 0.4;
+    
+}
+input[type=text] {
+    border: 2px solid #3281ff;
+    border-radius: 4px;
+    height: 15px;
+    text-align: center;
+}
+h1 {
+    text-align: center;
+}
+</style>
+</head>
 </head>
 
 <body>
 <h1>Chord Thingy2</h1>
+<div style="height: 250px;text-align:center;">
 <p>
-<button type="button" id="b1" onclick="check(1)"> I </button>
-<button type="button" id="b2" onclick="check(2)"> ii </button>
-<button type="button" id="b3" onclick="check(3)"> iii </button>
-<button type="button" id="b4" onclick="check(4)"> IV </button>
-<button type="button" id="b5" onclick="check(5)"> V </button>
-<button type="button" id="b6" onclick="check(6)"> vi </button>
-<button type="button" id="b7" onclick="check(7)"> vii° </button>
+<button class="button" id="b6" onclick="check(6)" > vi </button>
+<button class="button" id="b1" onclick="check(1)" > I </button>
+<button class="button" id="b3" onclick="check(3)" > iii </button>
+<br>
+<button class="button" id="b4" onclick="check(4)"> IV </button>
+<button class="button" id="b2" onclick="check(2)"> ii </button>
+<br>
+<button class="button" id="b7" onclick="check(7)"> vii&#176; </button>
+<button class="button" id="b5" onclick="check(5)"> V </button>
+
 <br>
 <br>
 Score
@@ -22,6 +67,7 @@ Score
 Highscore
 <input type='text' id='id2' size="6" />
 </p>
+</div>
 
 <script src="howler.core.js"></script>
 <script type="text/javascript">
@@ -35,11 +81,17 @@ var array3 = [1,4,5,6];
 var array4 = [1,3,4,5,6];
 var array5 = [1,2,3,4,5,6,7];
 
+document.getElementById("b2").classList.toggle('disabled');
+document.getElementById("b3").classList.toggle('disabled');
+document.getElementById("b4").classList.toggle('disabled');
+document.getElementById("b6").classList.toggle('disabled');
+document.getElementById("b7").classList.toggle('disabled');
 document.getElementById("b2").disabled = true;
 document.getElementById("b3").disabled = true;
 document.getElementById("b4").disabled = true;
 document.getElementById("b6").disabled = true;
 document.getElementById("b7").disabled = true;
+
 
 document.getElementById("id1").disabled = true;
 document.getElementById("id2").disabled = true;
@@ -70,19 +122,34 @@ function playNext(){
 	}
 	else if (score < 15){
 		document.getElementById("b4").disabled = false;
+		if ( document.getElementById("b4").classList.contains('disabled') ){
+			document.getElementById("b4").classList.toggle('disabled');
+		}
 		lastplayed = array2[Math.floor(Math.random()*array2.length)];
 	}
 	else if (score < 30){
 		document.getElementById("b6").disabled = false;
+		if ( document.getElementById("b6").classList.contains('disabled') ){
+			document.getElementById("b6").classList.toggle('disabled');
+		}
 		lastplayed = array3[Math.floor(Math.random()*array3.length)];
 	}
 	else if (score < 45){
 		document.getElementById("b3").disabled = false;
+		if ( document.getElementById("b3").classList.contains('disabled') ){
+			document.getElementById("b3").classList.toggle('disabled');
+		}
 		lastplayed = array4[Math.floor(Math.random()*array4.length)];
 	}
 	else {
 		document.getElementById("b2").disabled = false;
 		document.getElementById("b7").disabled = false;
+		if ( document.getElementById("b2").classList.contains('disabled') ){
+			document.getElementById("b7").classList.toggle('disabled');
+		}
+		if ( document.getElementById("b4").classList.contains('disabled') ){
+			document.getElementById("b4").classList.toggle('disabled');
+		}
 		lastplayed = array5[Math.floor(Math.random()*array5.length)];
 	}
 	
